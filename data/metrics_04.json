@@ -1,0 +1,45 @@
+{
+ "point": {
+  "peak_z_mm": 19.002999999999755,
+  "peak_x_mm": -0.008900000000000054,
+  "fwhm_lat_mm": 0.7925071835029807,
+  "fwhm_ax_mm": 0.23923049149725983,
+  "peak_sidelobe_dB": -19.48057523709312,
+  "theory_fwhm_rx_mm": 0.7241802001312336,
+  "theory_eq11_mm": 0.8459768700787402,
+  "pymust_fwhm_lat_mm": 0.7925008435616053,
+  "rms_diff_vs_pymust_dB": 0.16211907352682428
+ },
+ "wires": {
+  "wire_10mm_est_z_mm": 10.004000000000035,
+  "wire_20mm_est_z_mm": 19.994750000000124,
+  "wire_30mm_est_z_mm": 30.00475000000021,
+  "pair_valley_dB": -0.30710339839246975,
+  "pair_separated_(valley<-3dB)": false,
+  "fwhm_lat_wire20mm_mm": 0.8271553958687075
+ },
+ "contrast": {
+  "1 angle (0 deg)": {
+   "anechoic": {
+    "CR_dB": -15.22122858970041,
+    "CNR": 1.4353143044894874
+   },
+   "hyperechoic": {
+    "CR_dB": 11.413940596137326,
+    "CNR": 1.2340847288089298
+   },
+   "speckle_SNR": 1.7362432325482362
+  },
+  "21 angles compounded": {
+   "anechoic": {
+    "CR_dB": -23.57903285985016,
+    "CNR": 1.4256465556118052
+   },
+   "hyperechoic": {
+    "CR_dB": 11.984443545286021,
+    "CNR": 1.145308664500124
+   },
+   "speckle_SNR": 1.5102912393818053
+  }
+ }
+}
