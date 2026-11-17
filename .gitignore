@@ -1,1 +1,52 @@
+# ---------------- Virtual Environments ----------------
 /venv
+venv/
+.venv/
+env/
+ENV/
+
+# ---------------- Large Simulation Data (NumPy / pymust) ----------------
+# Ignore heavy pre-beamformed RF channel data (~250 MB total)
+data/*.npz
+*.npz
+*.npy
+*.mat
+*.h5
+*.hdf5
+
+# Keep lightweight quantitative evaluation metrics tracked
+!data/metrics_*.json
+
+# ---------------- Python Bytecode & Caches ----------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------------- Matplotlib / Jupyter / Logs ----------------
+.ipynb_checkpoints/
+.matplotlib/
+*.log
+*.tmp
+
+# ---------------- Archives & Bundles ----------------
+*.zip
+*.tar.gz
+*.rar
+
+# ---------------- IDEs & OS Metadata ----------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
