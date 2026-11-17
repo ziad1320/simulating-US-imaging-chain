@@ -182,7 +182,7 @@ python 05_nsi.py point
 |---|---|---|
 | `fig01_array.png` | 128 elements, 32-element window | Window = 9.75 mm |
 | `fig02_pulse_spectrum.png` | Eq. 5 pulse and simulated pulse, time and spectrum | Eq. 5 band 3.00-7.00 MHz. Simulated band 3.0-6.47 MHz. |
-| `fig03_phantoms.png` | Scatterer maps | Point 1, wires 4485, contrast about 36,000 (full density) |
+| `fig03_phantoms.png` | Scatterer maps, three panels. Point: zoomed 4 x 4 mm window with the single scatterer in red. Wires: the 5 wires (rc = 1) in large red dots over the weak background in small grey dots. Contrast: dot size follows scatterer strength, and zero-strength scatterers are not drawn, so the anechoic cyst (blue circle) looks empty while the hyperechoic cyst (red circle) looks dense and dark. | Point 1, wires 4485 (5 wires + 4480 background), contrast about 36,000 (full density). The contrast title counts every scatterer, including the zero-strength ones inside the anechoic cyst. |
 | `fig04_channel_data.png` | Raw RF, time vs element | One curved line per wire |
 | `fig05_point_psf.png` | Point image, lateral and axial profiles, own DAS vs `pymust.dasmtx`, theory curve | Point at 19.00 mm. Lateral FWHM 0.79 mm. Axial FWHM 0.24 mm. Peak sidelobe -19.5 dB. Own DAS matches MUST to 0.16 dB RMS. |
 | `fig06_wires.png` | Wire image (60 dB), close pair (40 dB), pair profile | Wires at 10.00, 19.99, 30.00 mm. The 0.8 mm pair is not separated (valley -0.3 dB). |
