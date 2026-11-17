@@ -23,7 +23,7 @@ A complete, end-to-end simulation of an ultrasound imaging system in Python: pro
 
 **Rule of the project.** Artifacts (speckle, clutter, NSI side effects) are shown and explained. They are not fixed.
 
-**Team** (course final project): Mazen Atef Awad (9230716), Sherif Mohamed Mahmoud (9230474), Anas Mohamed Abd Alaziz (9230259), Ziad Ramadan Mohamed (9230395), Mostafa Ashraf Mostafa (9230875).
+**Team** (course final project): Ziad Ramadan Mohamed, Anas Mohamed Abdalaziz, Sherif Mohamed Mahmoud, Mostafa Ashraf Mostafa, Mazen Atef Awad.
 
 **Repository layout**
 
