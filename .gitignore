@@ -50,3 +50,12 @@ dist/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# ---------------- LaTeX build files ----------------
+docs/*.aux
+docs/*.log
+docs/*.out
+docs/*.toc
+docs/*.fls
+docs/*.fdb_latexmk
+docs/*.synctex.gz

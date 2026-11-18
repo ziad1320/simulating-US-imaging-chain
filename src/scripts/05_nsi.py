@@ -1,13 +1,13 @@
 """Step 5 (optional) - Null Subtraction Imaging on the SAME saved RF data (Eq. 14-15).
-Usage: python 05_nsi.py [point|wires|contrast]"""
+Usage: python src/scripts/05_nsi.py [point|wires|contrast]"""
 import sys, json, os
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import config as cfg
-import beamformer as bf
-import metrics as mt
+from lib import config as cfg
+from lib import beamformer as bf
+from lib import metrics as mt
 
 what = sys.argv[1:] or ["point", "wires", "contrast"]
 METF = f"{cfg.DATA}/metrics_05.json"

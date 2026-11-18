@@ -1,6 +1,6 @@
 """phantoms.py - virtual phantoms as scatterer lists (x, z, rc) in metres."""
 import numpy as np
-import config as cfg
+from . import config as cfg
 
 
 def point_phantom():

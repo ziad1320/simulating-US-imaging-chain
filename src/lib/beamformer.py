@@ -9,7 +9,7 @@ t_off(th) = -min_i(x_i sin th)/c is the constant that makes all MUST transmit de
 """
 import numpy as np
 from scipy.signal import hilbert
-import config as cfg
+from . import config as cfg
 
 
 def subaperture_start(x0, n_sub=cfg.N_SUB):

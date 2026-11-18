@@ -1,10 +1,10 @@
-"""06_validate.py - automatic test suite. Run after 03/04/05:  python 06_validate.py
+"""06_validate.py - automatic test suite. Run after 03/04/05:  python src/scripts/06_validate.py
 Each test prints PASS/FAIL with the measured value and the accepted range."""
 import json, os
 import numpy as np
 import pymust
-import config as cfg
-import beamformer as bf
+from lib import config as cfg
+from lib import beamformer as bf
 
 res = []
 

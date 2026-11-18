@@ -29,19 +29,29 @@ A complete, end-to-end simulation of an ultrasound imaging system in Python: pro
 
 ```
 simulating-US-imaging-chain/
-  config.py            all parameters (change numbers only here)
-  phantoms.py          scatterer lists for the 3 phantoms
-  beamformer.py        own DAS beamformer, compounding, envelope, NSI
-  metrics.py           FWHM, sidelobe, CR, CNR, speckle SNR
-  01_probe_pulse.py    Step 1: array and pulse
-  02_phantoms.py       Step 2: phantom plots
-  03_simulate.py       Step 3: RF data generation (saves data/*.npz)
-  04_das.py            Step 4+7: DAS images and measurements
-  05_nsi.py            Step 5 (optional): NSI
-  06_validate.py       automatic tests (PASS/FAIL)
-  run_all.py           runs everything in order
-  data/                RF data (.npz) and metrics (.json)
-  figures/             all output pictures (.png)
+|-- data/                   generated RF data (.npz, git-ignored) and metrics (.json)
+|-- figures/                generated pictures (.png)
+|-- docs/                   project_explanation.tex (LaTeX explanation), Final_Project_Proposal.pdf
+|-- src/
+|   |-- lib/                the library (an importable package called "lib")
+|   |   |-- __init__.py
+|   |   |-- config.py       all parameters (change numbers only here)
+|   |   |-- phantoms.py     scatterer lists for the 3 phantoms
+|   |   |-- beamformer.py   own DAS beamformer, compounding, envelope, NSI
+|   |   `-- metrics.py      FWHM, sidelobe, CR, CNR, speckle SNR
+|   `-- scripts/            the programs you run
+|       |-- 01_probe_pulse.py    Step 1: array and pulse
+|       |-- 02_phantoms.py       Step 2: phantom plots
+|       |-- 03_simulate.py       Step 3: RF data generation (saves data/*.npz)
+|       |-- 04_das.py            Step 4+7: DAS images and measurements
+|       |-- 05_nsi.py            Step 5 (optional): NSI
+|       |-- 06_validate.py       automatic tests (PASS/FAIL)
+|       `-- run_all.py           runs everything in order
+|-- LICENSE                 MIT licence
+|-- README.md
+|-- requirements.txt        Python packages
+|-- pyproject.toml          lets "pip install -e ." make the "lib" package importable
+`-- .gitignore
 ```
 
 ---
@@ -108,7 +118,8 @@ Negative values are clipped to a small floor so the log is defined. Smaller `c` 
 ```bash
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
-pip install pymust numpy scipy matplotlib
+pip install -r requirements.txt
+pip install -e .                 # once: makes the "lib" package importable
 ```
 
 **Check the install** (should print a probe description):
@@ -117,7 +128,7 @@ pip install pymust numpy scipy matplotlib
 python -c "import pymust; print(pymust.getparam('L11-5v'))"
 ```
 
-Run all scripts from inside the `simulating-US-imaging-chain/` folder, because they import `config.py` and the other modules from the same folder.
+Run every command from the repository root. The scripts import the `lib` package (`from lib import config`), which is why `pip install -e .` is needed once, in the same environment you run the scripts with. Data and figures are always written to `data/` and `figures/` in the repository root, whatever folder you start from.
 
 ---
 
@@ -126,42 +137,43 @@ Run all scripts from inside the `simulating-US-imaging-chain/` folder, because t
 Run in this order. Each step needs the files made by the steps before it.
 
 ```bash
-python 01_probe_pulse.py
-python 02_phantoms.py
-python 03_simulate.py --noise
-python 04_das.py
-python 05_nsi.py
-python 06_validate.py
+python src/scripts/01_probe_pulse.py
+python src/scripts/02_phantoms.py
+python src/scripts/03_simulate.py --quick --noise
+python src/scripts/04_das.py
+python src/scripts/05_nsi.py
+python src/scripts/06_validate.py
 ```
 
-Or run everything: `python run_all.py --quick --noise`
+Or run everything: `python src/scripts/run_all.py --quick --noise`
 
 **Choose a simulation size for step 3**
 
 | Command | Contrast phantom | Time (1 core) |
 |---|---|---|
-| `python 03_simulate.py --quick --noise` | 5 angles, half density | about 4 min |
-| `python 03_simulate.py --medium --noise` | 21 angles, half density | about 15 min |
-| `python 03_simulate.py --noise` | 21 angles, full density (project spec) | about 40 min |
+| `python src/scripts/03_simulate.py --quick --noise` | 5 angles, half density | about 4 min |
+| `python src/scripts/03_simulate.py --medium --noise` | 21 angles, half density | about 15 min |
+| `python src/scripts/03_simulate.py --noise` | 21 angles, full density (project spec) | about 40 min |
 
 The point and wire phantoms take seconds in every mode. Add `--only point`, `--only wires` or `--only contrast` to simulate one phantom. The `--noise` flag also saves the 35 dB and 10 dB noisy copies.
 
 **Run steps 4 and 5 for one phantom only**
 
 ```bash
-python 04_das.py point        # or: wires, contrast
-python 05_nsi.py point
+python src/scripts/04_das.py point        # or: wires, contrast
+python src/scripts/05_nsi.py point
 ```
 
 **Beamforming time.** The 21-angle contrast image takes a few minutes in `04_das.py` and again in `05_nsi.py`.
 
 **Tips**
 
-- Change any number (angles, density, cyst size, NSI `c`) in `config.py`, then rerun from step 2 or 3.
+- Change any number (angles, density, cyst size, NSI `c`) in `src/lib/config.py`, then rerun from step 2 or 3.
 - Re-running `03_simulate.py` overwrites the files in `data/`.
+- The `.npz` data files are git-ignored (the 21-angle contrast files are about 61 MB each). After cloning the repository, create them again with step 3. The small `metrics_*.json` files and the figures are kept in the repository.
 - Expect `06_validate.py` to print `39/39 checks passed` when all stages were run. The NSI checks are skipped if `05_nsi.py` was not run.
-- Common problem: `ModuleNotFoundError: config`. You are not inside the `simulating-US-imaging-chain/` folder.
-- Common problem: `AttributeError` or option errors from `simus`. Use the plain `simus` call as in `03_simulate.py`. Extra options such as `ElementSplitting` and `dBThresh` crashed in the tested pymust version.
+- Common problem: `ModuleNotFoundError: No module named 'lib'`. Run `pip install -e .` once from the repository root, in the same environment (virtual environment) that you use to run the scripts.
+- Common problem: `AttributeError` or option errors from `simus`. Use the plain `simus` call as in `src/scripts/03_simulate.py`. Extra options such as `ElementSplitting` and `dBThresh` crashed in the tested pymust version.
 
 ---
 
@@ -210,7 +222,7 @@ It prints one line per check, such as `[PASS] lateral FWHM (-6 dB) [mm]  0.793 m
 
 ## 6. Licence
 
-This project is licensed under the terms of the **MIT Licence**. The code in this repository is owned by its authors: Mazen Atef Awad, Sherif Mohamed Mahmoud, Anas Mohamed Abd Alaziz, Ziad Ramadan Mohamed, Mostafa Ashraf Mostafa.
+The code in this repository is released under the **MIT licence**. The full text is in the [`LICENSE`](LICENSE) file.
 
 ---
 

@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pymust
-import config as cfg
+from lib import config as cfg
 
 xe = cfg.element_x()
 p = cfg.make_param()

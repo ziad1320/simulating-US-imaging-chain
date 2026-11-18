@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import config as cfg
-import phantoms as ph
+from lib import config as cfg
+from lib import phantoms as ph
 
 P = {"point": ph.point_phantom(), "wires": ph.wire_phantom(), "contrast": ph.contrast_phantom()}
 fig, ax = plt.subplots(1, 3, figsize=(16, 5.5), gridspec_kw={"width_ratios": [1, 1, 1.3]})

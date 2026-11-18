@@ -2,7 +2,7 @@
 import os
 import numpy as np
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root (this file is <root>/src/lib/config.py)
 DATA = os.path.join(ROOT, "data")
 FIG = os.path.join(ROOT, "figures")
 os.makedirs(DATA, exist_ok=True)

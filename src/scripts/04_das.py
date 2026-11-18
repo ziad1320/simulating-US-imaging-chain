@@ -1,14 +1,14 @@
 """Step 4 + 7 - custom DAS beamforming, B-mode images, cross-check vs pymust, quantitative metrics.
-Usage: python 04_das.py [point|wires|contrast]   (no argument = all)"""
+Usage: python src/scripts/04_das.py [point|wires|contrast]   (no argument = all)"""
 import sys, json, os
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pymust
-import config as cfg
-import beamformer as bf
-import metrics as mt
+from lib import config as cfg
+from lib import beamformer as bf
+from lib import metrics as mt
 
 what = sys.argv[1:] or ["point", "wires", "contrast"]
 METF = f"{cfg.DATA}/metrics_04.json"

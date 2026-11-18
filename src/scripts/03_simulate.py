@@ -1,13 +1,13 @@
 """Step 3 - RF channel-data simulation (MUST simus). Saves float32 arrays rf[angle, time, channel].
-Usage: python 03_simulate.py [--quick] [--noise] [--only point|wires|contrast]
+Usage: python src/scripts/03_simulate.py [--quick] [--noise] [--only point|wires|contrast]
   --quick : 5 angles and half the scatterer density for the contrast phantom (minutes instead of ~40 min)
   --medium: all 21 angles but half the scatterer density (~15 min); good compromise on a laptop
   --noise : also save SNR 35 dB and 10 dB noisy copies of the wire and contrast data"""
 import sys, time
 import numpy as np
 import pymust
-import config as cfg
-import phantoms as ph
+from lib import config as cfg
+from lib import phantoms as ph
 
 quick = "--quick" in sys.argv
 medium = "--medium" in sys.argv
